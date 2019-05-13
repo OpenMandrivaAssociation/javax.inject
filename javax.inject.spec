@@ -1,6 +1,6 @@
 Name: javax.inject
 Version: 1
-Release: 1
+Release: 2
 Group: Development/Java
 Summary: An implementation of the javax.inject API defined in JSR-330
 Source0: https://repo1.maven.org/maven2/javax/inject/javax.inject/%{version}/javax.inject-%{version}-sources.jar
@@ -57,14 +57,18 @@ javadoc -d docs -sourcepath . javax.inject
 cp %{S:1} .
 
 %install
-mkdir -p %{buildroot}%{_javadir} %{buildroot}%{_mavenpomdir} %{buildroot}%{_javadocdir}
+mkdir -p %{buildroot}%{_javadir}/modules %{buildroot}%{_mavenpomdir} %{buildroot}%{_javadocdir}
 cp javax.inject-%{version}.jar %{buildroot}%{_javadir}
 cp *.pom %{buildroot}%{_mavenpomdir}/
 %add_maven_depmap javax.inject-%{version}.pom javax.inject-%{version}.jar
+mv %{buildroot}%{_javadir}/*.jar %{buildroot}%{_javadir}/modules/
+ln -s modules/javax.inject-%{version}.jar %{buildroot}%{_javadir}/
+ln -s modules/javax.inject-%{version}.jar %{buildroot}%{_javadir}/javax.inject.jar
 cp -a docs %{buildroot}%{_javadocdir}/%{name}
 
 %files -f .mfiles
 %{_javadir}/*.jar
+%{_javadir}/modules/*.jar
 
 %files javadoc
 %{_javadocdir}/%{name}
