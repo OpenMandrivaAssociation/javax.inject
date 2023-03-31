@@ -1,6 +1,6 @@
 Name: javax.inject
 Version: 1
-Release: 2
+Release: 3
 Group: Development/Java
 Summary: An implementation of the javax.inject API defined in JSR-330
 Source0: https://repo1.maven.org/maven2/javax/inject/javax.inject/%{version}/javax.inject-%{version}-sources.jar
